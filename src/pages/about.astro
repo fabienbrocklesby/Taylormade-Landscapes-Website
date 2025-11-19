@@ -1,0 +1,137 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const processSteps = [
+  "Site visit & conversation – we listen to how you use the space and note site conditions.",
+  "Concept & itemised quote – clear scope, staging options, and allowances so nothing is hidden.",
+  "Scheduling & preparation – we coordinate trades, materials, and keep neighbours informed.",
+  "Construction & planting – Giles is on the tools ensuring details are finished properly.",
+  "Handover & maintenance – walk-through, care notes, and optional ongoing tidy-ups.",
+];
+---
+
+<BaseLayout
+  title="About | TaylorMade Landscapes, Nelson"
+  description="Meet Giles Taylor – trades-qualified landscaper with 40+ years crafting practical gardens throughout Nelson and Tasman."
+>
+  <div class="mx-auto max-w-4xl space-y-12 px-4 py-12">
+    <section class="grid gap-8 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+      <figure
+        class="relative h-72 overflow-hidden rounded-3xl shadow-lg transition duration-500 ease-out hover:-translate-y-1 hover:rotate-1"
+        data-aos="zoom-in"
+        data-aos-duration="600"
+        data-aos-easing="ease-out"
+      >
+        <picture>
+          <source srcset="/images/garden3.webp" type="image/webp" />
+          <img
+            src="/images/garden3.jpg"
+            alt="Raised timber deck with layered native planting around a Nelson home"
+            class="h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+      </figure>
+      <div class="space-y-4">
+        <p
+          class="badge badge-outline"
+          data-aos="fade"
+          data-aos-duration="450"
+          data-aos-delay="50"
+        >
+          Meet Giles Taylor
+        </p>
+        <h1
+          class="text-4xl font-bold"
+          data-aos="fade-up"
+          data-aos-duration="600"
+          data-aos-delay="100"
+          data-aos-easing="ease-out"
+        >
+          40+ years shaping gardens around Nelson
+        </h1>
+        <p
+          class="text-base-content/80"
+          data-aos="fade-up"
+          data-aos-duration="600"
+          data-aos-delay="200"
+          data-aos-easing="ease-out"
+        >
+          Giles started landscaping in the early 1980s and has worked on
+          everything from compact town courtyards to sprawling coastal sections.
+          His trade background means drainage, structural timber, and paving are
+          completed with the same care as planting.
+        </p>
+        <p
+          class="text-base-content/80"
+          data-aos="fade-up"
+          data-aos-duration="600"
+          data-aos-delay="300"
+          data-aos-easing="ease-out"
+        >
+          Clients appreciate his straight talk, tidy sites, and the fact that
+          he’s on the tools every day—not managing from afar. When the job
+          wraps, the only things left behind are clean edges and happy
+          neighbours.
+        </p>
+      </div>
+    </section>
+
+    <section class="space-y-4">
+      <h2
+        class="text-3xl font-semibold"
+        data-aos="fade-up"
+        data-aos-duration="600"
+        data-aos-easing="ease-out"
+      >
+        How we work
+      </h2>
+      <p
+        class="text-base-content/80"
+        data-aos="fade-up"
+        data-aos-duration="600"
+        data-aos-delay="120"
+        data-aos-easing="ease-out"
+      >
+        A clear, steady process keeps projects on track and stress-free.
+        Communication is honest, pricing is transparent, and you’ll always know
+        who is on site.
+      </p>
+      <ul class="steps steps-vertical lg:steps-horizontal">
+        {
+          processSteps.map((step, index) => (
+            <li
+              class="step step-primary"
+              aria-label={step}
+              data-aos="fade"
+              data-aos-duration="450"
+              data-aos-delay={(index * 70).toString()}
+            >
+              {step}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section
+      class="rounded-3xl bg-primary px-6 py-10 text-primary-content"
+      data-aos="fade-up"
+      data-aos-duration="600"
+      data-aos-easing="ease-out"
+    >
+      <h2 class="text-3xl font-semibold">Let’s walk your site together</h2>
+      <p class="mt-3 text-primary-content/90">
+        Whether it’s a new build or a gentle refresh, a short visit is the best
+        way to gauge what’s possible. Bring plans, photos, or just a wishlist.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-4">
+        <a class="btn" href="/contact">Book a visit</a>
+        <a class="btn btn-outline" href="mailto:hello@taylormadelandscapes.nz"
+          >Email Giles</a
+        >
+      </div>
+    </section>
+  </div>
+</BaseLayout>

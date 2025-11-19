@@ -1,0 +1,86 @@
+---
+const faqs = [
+  {
+    question: "How do we get started?",
+    answer:
+      "Send through a few details about your garden and we’ll book a site visit. Giles will walk the space with you, chat through ideas, and outline the next steps.",
+  },
+  {
+    question: "Do you charge for quotes?",
+    answer:
+      "Initial conversations and itemised quotes are free within Nelson and most Tasman suburbs. Larger design packages are priced transparently before we begin.",
+  },
+  {
+    question: "Can you work with our existing plans?",
+    answer:
+      "Absolutely. We can price directly from your designer’s drawings or collaborate to refine practical details before construction.",
+  },
+  {
+    question: "Do you organise subtrades such as electricians or plumbers?",
+    answer:
+      "Yes—after 40 years in the region we have reliable subtrades we trust. We can coordinate lighting, drainage, and other specialists as part of the job.",
+  },
+  {
+    question: "Do you offer ongoing maintenance?",
+    answer:
+      "We provide seasonal tidy-ups, pruning, feeding, and lawn care to keep everything looking sharp long after the build is complete.",
+  },
+  {
+    question: "Which areas do you work in?",
+    answer:
+      "Nelson City, Stoke, Richmond, Brightwater, Mapua, Atawhai, Hira, and most of Tasman. Ask if you’re further afield—we’ll let you know what’s possible.",
+  },
+  {
+    question: "How far ahead do we need to book?",
+    answer:
+      "Lead times change with the seasons, but most projects are scheduled 4–8 weeks out. We’ll give you realistic timeframes upfront.",
+  },
+  {
+    question: "What does a typical project cost?",
+    answer:
+      "Every site is different, so we provide clear, itemised quotes outlining labour, materials, and allowances so you can make informed decisions.",
+  },
+  {
+    question: "Can you help with smaller jobs?",
+    answer:
+      "Yes. From reviving a single courtyard to installing ready-lawn, we take on projects of all sizes if we’re the right fit.",
+  },
+];
+---
+
+<section class="space-y-6">
+  <div
+    class="space-y-2 text-center"
+    data-aos="fade-up"
+    data-aos-duration="600"
+    data-aos-easing="ease-out"
+  >
+    <p class="section-subtitle">FAQs</p>
+    <h2 class="section-title text-3xl">
+      Straight answers before the shovel hits the ground
+    </h2>
+    <p class="mx-auto max-w-2xl text-base-content/80">
+      If you can’t find what you need, reach out—Giles is happy to talk through
+      your project and share honest guidance.
+    </p>
+  </div>
+  <div class="space-y-3" data-aos="fade" data-aos-duration="500">
+    {
+      faqs.map((item, idx) => (
+        <div
+          class="collapse collapse-arrow border border-base-300 bg-base-100"
+          data-aos="zoom-in"
+          data-aos-duration="450"
+          data-aos-delay={(idx * 60).toString()}
+          data-aos-easing="ease-out"
+        >
+          <input type="checkbox" name={`faq-${idx}`} />
+          <div class="collapse-title text-lg font-medium">{item.question}</div>
+          <div class="collapse-content text-base-content/80">
+            <p class="faq-answer">{item.answer}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

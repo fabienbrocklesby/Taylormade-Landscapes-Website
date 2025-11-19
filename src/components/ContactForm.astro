@@ -1,0 +1,184 @@
+---
+interface Props {
+  defaultService?: string;
+}
+
+const { defaultService } = Astro.props as Props;
+---
+
+<section
+  class="card border border-base-300 bg-base-100 shadow-xl"
+  data-aos="fade-up"
+  data-aos-duration="600"
+  data-aos-easing="ease-out"
+>
+  <div
+    class="card-body space-y-6"
+    data-aos="fade"
+    data-aos-duration="500"
+    data-aos-delay="150"
+  >
+    <h2 class="card-title text-3xl">Tell us about your landscape project</h2>
+    <p class="text-base-content/80">
+      Please share a few details and Giles will be in touch with a call or site
+      visit to chat through ideas, budgets, and timelines.
+    </p>
+    <form
+      id="contact-form"
+      class="grid gap-4"
+      method="POST"
+      action="/api/contact"
+    >
+      <div class="grid gap-4 md:grid-cols-2">
+        <label class="form-control">
+          <span class="label-text font-semibold">Name *</span>
+          <input
+            type="text"
+            name="name"
+            required
+            class="input input-bordered"
+            placeholder="Full name"
+          />
+        </label>
+        <label class="form-control">
+          <span class="label-text font-semibold">Email *</span>
+          <input
+            type="email"
+            name="email"
+            required
+            class="input input-bordered"
+            placeholder="you@example.com"
+          />
+        </label>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2">
+        <label class="form-control">
+          <span class="label-text font-semibold">Phone *</span>
+          <input
+            type="tel"
+            name="phone"
+            required
+            class="input input-bordered"
+            placeholder="021 123 4567"
+          />
+        </label>
+        <label class="form-control">
+          <span class="label-text font-semibold">Suburb *</span>
+          <input
+            type="text"
+            name="suburb"
+            required
+            class="input input-bordered"
+            placeholder="e.g. Stoke, Mapua"
+          />
+        </label>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2">
+        <label class="form-control">
+          <span class="label-text font-semibold">Service type *</span>
+          <select
+            name="serviceType"
+            class="select select-bordered"
+            required
+            value={defaultService ?? undefined}
+          >
+            <option value="design">Design & consultation</option>
+            <option value="new-build">New build landscape</option>
+            <option value="makeover">Garden makeover</option>
+            <option value="hard-landscaping">Hard landscaping</option>
+            <option value="lawns-planting">Lawns & planting</option>
+            <option value="maintenance">Maintenance & tidy-up</option>
+            <option value="not-sure">Not sure yet</option>
+          </select>
+        </label>
+        <label class="form-control">
+          <span class="label-text font-semibold">Budget range (optional)</span>
+          <select name="budgetRange" class="select select-bordered">
+            <option value="">Select a range</option>
+            <option value="under-10k">Under $10k</option>
+            <option value="10-25k">$10k – $25k</option>
+            <option value="25-50k">$25k – $50k</option>
+            <option value="50k-plus">$50k +</option>
+          </select>
+        </label>
+      </div>
+      <label class="form-control">
+        <span class="label-text font-semibold">Brief description *</span>
+        <textarea
+          name="description"
+          class="textarea textarea-bordered min-h-32"
+          required
+          placeholder="Tell us how you use the space and what needs to change."
+        ></textarea>
+      </label>
+      <label class="form-control">
+        <span class="label-text font-semibold">Preferred timing</span>
+        <select name="preferredTiming" class="select select-bordered">
+          <option value="asap">ASAP</option>
+          <option value="1-3-months">Next 1–3 months</option>
+          <option value="this-year">Later this year</option>
+          <option value="flexible">I’m flexible</option>
+        </select>
+      </label>
+      <div
+        id="form-status"
+        class="hidden rounded-lg border border-success bg-success/10 p-4 text-success"
+        role="status"
+        aria-live="polite"
+      >
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <button type="submit" class="btn btn-primary">Send message</button>
+        <p class="text-sm text-base-content/70">
+          We’ll reply within two working days.
+        </p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    if (typeof window === "undefined" || !("fetch" in window)) return;
+    const form = document.getElementById("contact-form");
+    const status = document.getElementById("form-status");
+    if (!form || !status || !(form instanceof HTMLFormElement)) return;
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      status.classList.remove(
+        "hidden",
+        "text-error",
+        "border-error",
+        "bg-error/10",
+      );
+      status.classList.add("border-success", "bg-success/10", "text-success");
+      status.textContent = "Sending…";
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          body: formData,
+        });
+        const data = await response.json();
+        if (!response.ok || !data.ok) {
+          throw new Error(data?.message || "Something went wrong");
+        }
+        status.textContent =
+          "Thanks! We’ve received your message and will be in touch shortly.";
+        form.reset();
+      } catch (error) {
+        status.classList.remove(
+          "border-success",
+          "bg-success/10",
+          "text-success",
+        );
+        status.classList.add("border-error", "bg-error/10", "text-error");
+        status.textContent =
+          "Sorry, we could not send that just now. Please try again or email hello@taylormadelandscapes.nz.";
+      }
+    });
+  })();
+</script>

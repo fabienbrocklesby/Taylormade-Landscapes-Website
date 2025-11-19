@@ -1,0 +1,85 @@
+---
+interface Props {
+  limit?: number;
+}
+
+const testimonials = [
+  {
+    quote:
+      "Giles completely reshaped our Richmond section and somehow kept everything tidy the entire time. We appreciated the clear quote and there were zero surprises.",
+    author: "Emily & James",
+    location: "Richmond",
+  },
+  {
+    quote:
+      "Our Mapua bach now has planting that survives the sea breeze. Giles listened, explained each stage, and left the site spotless.",
+    author: "Katrina",
+    location: "Mapua",
+  },
+  {
+    quote:
+      "We needed safe access down a steep Atawhai bank. The terracing Giles built feels rock solid and already looks like it has always been there.",
+    author: "Tom & Mei",
+    location: "Atawhai",
+  },
+  {
+    quote:
+      "Honest advice, fair pricing, and workmanship that shows decades of experience. We recommend Giles to everyone who comments on our garden.",
+    author: "Liam",
+    location: "Stoke",
+  },
+  {
+    quote:
+      "From the first site visit to the final sweep-up Giles kept us in the loop. The lawn and planting have taken off and maintenance is minimal.",
+    author: "Rachel & Ben",
+    location: "Nelson South",
+  },
+];
+
+const { limit } = Astro.props as Props;
+const displayed =
+  typeof limit === "number" ? testimonials.slice(0, limit) : testimonials;
+---
+
+<section class="space-y-6">
+  <div
+    class="space-y-2 text-center"
+    data-aos="fade-up"
+    data-aos-duration="600"
+    data-aos-easing="ease-out"
+  >
+    <p class="section-subtitle">Testimonials</p>
+    <h2 class="section-title text-3xl">
+      Neighbours who trust TaylorMade Landscapes
+    </h2>
+    <p class="mx-auto max-w-2xl text-base-content/80">
+      Real projects for real people around Nelson & Tasman. Giles prides himself
+      on tidy sites, friendly communication, and work that stands up to local
+      conditions.
+    </p>
+  </div>
+  <div
+    class="grid gap-6 md:grid-cols-2"
+    data-aos="fade"
+    data-aos-duration="500"
+  >
+    {
+      displayed.map((item, index) => (
+        <blockquote
+          class="card border border-base-300 bg-base-100 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+          data-aos="zoom-in"
+          data-aos-duration="450"
+          data-aos-delay={(index * 80).toString()}
+          data-aos-easing="ease-out"
+        >
+          <div class="card-body space-y-4">
+            <p class="text-lg leading-relaxed">“{item.quote}”</p>
+            <p class="text-sm font-semibold text-base-content/70">
+              {item.author} – {item.location}
+            </p>
+          </div>
+        </blockquote>
+      ))
+    }
+  </div>
+</section>

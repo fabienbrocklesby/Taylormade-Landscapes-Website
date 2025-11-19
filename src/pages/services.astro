@@ -1,0 +1,156 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const services = [
+  {
+    title: "Design & consultation",
+    body: "On-site conversations, sketches, and planting palettes that fit your lifestyle, budget, and the Nelson / Tasman climate.",
+    bullets: [
+      "On-site walkthroughs and note-taking",
+      "Simple concept sketches with budget guidance",
+      "Planting and material suggestions for local conditions",
+    ],
+    query: "design",
+  },
+  {
+    title: "New builds & full installs",
+    body: "Set your new home up with finished lawns, planting, and outdoor living spaces so you can move in and enjoy the garden from day one.",
+    bullets: [
+      "Coordination with builders and other trades",
+      "Driveways, paths, and patio areas",
+      "Planting, lawn establishment, and irrigation allowances",
+    ],
+    query: "new-build",
+  },
+  {
+    title: "Garden makeovers & re-planting",
+    body: "Breathe life into established properties with new layouts, soil improvement, and plant selections that suit how you now use the space.",
+    bullets: [
+      "Selective demolition and disposal",
+      "New paving, edging, or small timber features",
+      "Layered planting and mulching for quick impact",
+    ],
+    query: "makeover",
+  },
+  {
+    title: "Hard landscaping & outdoor living",
+    body: "Paving, paths, steps, and low retaining walls built with durable materials and tidy detailing for residential sections.",
+    bullets: [
+      "Paving, concrete, and timber decking",
+      "Garden edging, steps, and low retaining",
+      "Screens, planters, and simple pergolas",
+    ],
+    query: "hard-landscaping",
+  },
+  {
+    title: "Soft landscaping, planting & lawns",
+    body: "Soil conditioning, plant supply, and turf or seed lawns with irrigation and mulching to keep maintenance sensible.",
+    bullets: [
+      "Plant sourcing, placement, and watering-in",
+      "Soil prep, compost, and mulch installation",
+      "Ready-lawn or seed lawns with edging",
+    ],
+    query: "lawns-planting",
+  },
+  {
+    title: "Ongoing maintenance & tidy-ups",
+    body: "Seasonal visits or regular care so your garden keeps pace with Nelson’s growing seasons and coastal weather.",
+    bullets: [
+      "Pruning, trimming, and weeding",
+      "Lawn care, feeding, and mulch top-ups",
+      "Seasonal clean-ups before events or holidays",
+    ],
+    query: "maintenance",
+  },
+];
+---
+
+<BaseLayout
+  title="Services | TaylorMade Landscapes, Nelson"
+  description="Design, build, planting, and maintenance services for Nelson and Tasman homes by Giles Taylor."
+>
+  <div class="mx-auto max-w-5xl space-y-10 px-4 py-12">
+    <section class="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+      <div class="space-y-4">
+        <h1
+          class="text-4xl font-bold"
+          data-aos="fade-up"
+          data-aos-duration="600"
+          data-aos-easing="ease-out"
+        >
+          Services
+        </h1>
+        <p
+          class="text-lg text-base-content/80"
+          data-aos="fade-up"
+          data-aos-duration="600"
+          data-aos-delay="100"
+          data-aos-easing="ease-out"
+        >
+          Every project starts with listening. Giles maps how you live in the
+          space, then designs and builds practical gardens that handle Nelson’s
+          sun, salt, and slopes.
+        </p>
+        <p
+          class="text-base-content/80"
+          data-aos="fade-up"
+          data-aos-duration="600"
+          data-aos-delay="200"
+          data-aos-easing="ease-out"
+        >
+          Choose a full design-and-build package or pick the bits you need. All
+          quotes are itemised so you can phase work to suit your budget and
+          timeline.
+        </p>
+      </div>
+      <figure
+        class="h-64 overflow-hidden rounded-3xl border border-base-300 bg-base-100 shadow-sm"
+        data-aos="zoom-in"
+        data-aos-duration="600"
+        data-aos-delay="150"
+        data-aos-easing="ease-out"
+      >
+        <picture>
+          <source srcset="/images/garden2.webp" type="image/webp" />
+          <img
+            src="/images/garden2.jpg"
+            alt="New build backyard with fresh lawn, garden edging, and hardy planting"
+            class="h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+      </figure>
+    </section>
+
+    <div class="space-y-10">
+      {
+        services.map((service, index) => (
+          <section
+            class="rounded-3xl border border-base-300 bg-base-100 p-6 shadow-sm"
+            data-aos="fade"
+            data-aos-duration="500"
+            data-aos-delay={(index * 80).toString()}
+            data-aos-easing="ease-out"
+          >
+            <div class="space-y-3">
+              <h2 class="text-2xl font-semibold">{service.title}</h2>
+              <p class="text-base-content/80">{service.body}</p>
+              <ul class="list-disc space-y-1 pl-6 text-base-content/80">
+                {service.bullets.map((bullet) => (
+                  <li>{bullet}</li>
+                ))}
+              </ul>
+              <a
+                class="btn btn-outline"
+                href={`/contact?service=${service.query}`}
+              >
+                Enquire about this service
+              </a>
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,77 @@
+---
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/about", label: "About" },
+  { href: "/testimonials", label: "Testimonials" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/contact", label: "Contact" },
+];
+---
+
+<nav class="navbar mx-auto max-w-6xl px-4" aria-label="Primary">
+  <div class="navbar-start">
+    <a
+      class="text-xl font-semibold tracking-tight"
+      href="/"
+      aria-label="TaylorMade Landscapes home"
+    >
+      TaylorMade Landscapes
+    </a>
+  </div>
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal gap-1">
+      {
+        navLinks.map((link) => (
+          <li>
+            <a class="nav-link" href={link.href}>
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <div class="navbar-end gap-2">
+    <a
+      class="btn btn-primary hidden lg:inline-flex hover:shadow-xl"
+      href="/contact">Request a quote</a
+    >
+    <details class="dropdown dropdown-end lg:hidden">
+      <summary
+        class="btn btn-ghost btn-circle"
+        aria-label="Open navigation menu"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </summary>
+      <ul
+        class="menu dropdown-content mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
+      >
+        {
+          navLinks.map((link) => (
+            <li>
+              <a class="nav-link" href={link.href}>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+        <li class="mt-2">
+          <a class="btn btn-primary" href="/contact">Request a quote</a>
+        </li>
+      </ul>
+    </details>
+  </div>
+</nav>

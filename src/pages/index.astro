@@ -1,0 +1,116 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroHome from "../components/HeroHome.astro";
+import ServicesOverview from "../components/ServicesOverview.astro";
+import TestimonialList from "../components/TestimonialList.astro";
+import BeforeAfter from "../components/BeforeAfter.astro";
+---
+
+<BaseLayout
+  title="TaylorMade Landscapes | Nelson & Tasman Residential Landscaping"
+  description="Hands-on landscape design, builds, planting, and garden care for Nelson and Tasman homes by owner-operator Giles Taylor."
+>
+  <div class="mx-auto flex max-w-6xl flex-col gap-16 px-4 py-12 lg:py-16">
+    <HeroHome />
+
+    <section aria-labelledby="why-title" class="space-y-6">
+      <div
+        class="text-center"
+        data-aos="fade-up"
+        data-aos-duration="600"
+        data-aos-easing="ease-out"
+      >
+        <p class="section-subtitle">Why choose us</p>
+        <h2 id="why-title" class="section-title text-3xl">
+          Local experience, tidy workmanship
+        </h2>
+      </div>
+      <div class="stats stats-vertical bg-base-100 shadow lg:stats-horizontal">
+        <div
+          class="stat"
+          data-aos="zoom-in"
+          data-aos-duration="450"
+          data-aos-easing="ease-out"
+        >
+          <div class="stat-title">Experience</div>
+          <div class="stat-value text-primary">40+ yrs</div>
+          <div class="stat-desc">Hands-on residential work</div>
+        </div>
+        <div
+          class="stat"
+          data-aos="zoom-in"
+          data-aos-duration="450"
+          data-aos-delay="80"
+          data-aos-easing="ease-out"
+        >
+          <div class="stat-title">Qualified</div>
+          <div class="stat-value text-primary">Trades</div>
+          <div class="stat-desc">Trade qualified & insured</div>
+        </div>
+        <div
+          class="stat"
+          data-aos="zoom-in"
+          data-aos-duration="450"
+          data-aos-delay="160"
+          data-aos-easing="ease-out"
+        >
+          <div class="stat-title">Coverage</div>
+          <div class="stat-value text-primary">Nelson</div>
+          <div class="stat-desc">Tasman suburbs too</div>
+        </div>
+        <div
+          class="stat"
+          data-aos="zoom-in"
+          data-aos-duration="450"
+          data-aos-delay="240"
+          data-aos-easing="ease-out"
+        >
+          <div class="stat-title">Approach</div>
+          <div class="stat-value text-primary">Transparent</div>
+          <div class="stat-desc">Clear, itemised quotes</div>
+        </div>
+      </div>
+    </section>
+
+    <ServicesOverview />
+
+    <BeforeAfter />
+
+    <section class="space-y-8">
+      <TestimonialList limit={3} />
+      <div
+        class="text-center"
+        data-aos="fade"
+        data-aos-duration="500"
+        data-aos-delay="150"
+      >
+        <a class="btn btn-secondary btn-outline" href="/testimonials"
+          >Read more testimonials</a
+        >
+      </div>
+    </section>
+
+    <section
+      class="rounded-3xl bg-primary px-6 py-12 text-primary-content"
+      data-aos="fade-up"
+      data-aos-duration="600"
+      data-aos-easing="ease-out"
+    >
+      <div class="space-y-4 text-center">
+        <h2 class="text-3xl font-bold">
+          Ready for a garden that actually works?
+        </h2>
+        <p class="text-lg">
+          Book a no-obligation site visit. Giles will listen, offer honest
+          advice, and send a clear quote with realistic timeframes.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a class="btn btn-secondary" href="/contact">Request a quote</a>
+          <a class="btn btn-outline" href="tel:+64211234567"
+            >Call 021 123 4567</a
+          >
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

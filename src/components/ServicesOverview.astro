@@ -1,0 +1,77 @@
+---
+const services = [
+  {
+    title: "Landscape design",
+    description:
+      "Practical concepts, planting palettes, and staging advice shaped around Nelson and Tasman conditions.",
+  },
+  {
+    title: "Garden makeovers",
+    description:
+      "Refresh established gardens with new layouts, seasonal planting, and tidy finishing touches.",
+  },
+  {
+    title: "Outdoor living spaces",
+    description:
+      "Paving, patios, and small timber features that make outdoor areas easy to live in year-round.",
+  },
+  {
+    title: "Retaining & structures",
+    description:
+      "Low retaining, steps, edging, and simple timber screens that keep sloping sections usable.",
+  },
+  {
+    title: "Planting & lawns",
+    description:
+      "Plant supply, soil prep, and turf or seed lawns chosen to handle sun, wind, and coastal salt.",
+  },
+  {
+    title: "Maintenance plans",
+    description:
+      "Seasonal tidy-ups, pruning, and lawn care so your garden stays healthy after the build.",
+  },
+];
+---
+
+<section class="space-y-6">
+  <div
+    class="space-y-2 text-center"
+    data-aos="fade-up"
+    data-aos-duration="600"
+    data-aos-easing="ease-out"
+  >
+    <p class="section-subtitle">Services</p>
+    <h2 class="section-title text-3xl">
+      Landscaping services for every stage of your garden
+    </h2>
+    <p class="mx-auto max-w-2xl text-base-content/80">
+      From early sketches to the final sweep-up, Giles and his small local team
+      handle residential projects with clear communication, tidy sites, and
+      practical advice.
+    </p>
+  </div>
+  <div
+    class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+    data-aos="fade"
+    data-aos-duration="500"
+  >
+    {
+      services.map((service, index) => (
+        <a
+          class="card border border-base-300 bg-base-100 shadow-sm transition duration-300 hover:-translate-y-1.5 focus-visible:-translate-y-1.5"
+          href="/services"
+          data-aos="zoom-in"
+          data-aos-duration="450"
+          data-aos-delay={(index * 80).toString()}
+          data-aos-easing="ease-out"
+        >
+          <div class="card-body">
+            <h3 class="card-title text-lg">{service.title}</h3>
+            <p class="text-base-content/80">{service.description}</p>
+            <span class="link link-primary mt-3">Explore service</span>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</section>
