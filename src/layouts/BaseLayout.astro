@@ -8,15 +8,16 @@ interface Props {
   description?: string;
 }
 
+const aosClientUrl = import.meta.glob("../scripts/aos-client.js", {
+  query: "?url",
+  import: "default",
+  eager: true,
+})["../scripts/aos-client.js"] as string;
+
 const {
   title = "TaylorMade Landscapes | Nelson Landscape Design & Gardening",
   description = "Owner-operated landscape gardening, design, and build across Nelson and Tasman by Giles Taylor.",
 } = Astro.props as Props;
-
-// Astro's runtime provides `Astro.resolve`, but the type isn't in our defs yet.
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const aosClientUrl = Astro.resolve("../scripts/aos-client.js");
 ---
 
 <!doctype html>
