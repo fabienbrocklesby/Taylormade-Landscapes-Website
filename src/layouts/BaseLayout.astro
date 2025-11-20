@@ -8,12 +8,6 @@ interface Props {
   description?: string;
 }
 
-const aosClientUrl = import.meta.glob("../scripts/aos-client.js", {
-  query: "?url",
-  import: "default",
-  eager: true,
-})["../scripts/aos-client.js"] as string;
-
 const {
   title = "TaylorMade Landscapes | Nelson Landscape Design & Gardening",
   description = "Owner-operated landscape gardening, design, and build across Nelson and Tasman by Giles Taylor.",
@@ -36,6 +30,10 @@ const {
       content="https://taylormadelandscapes.nz/og-image.jpg"
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"
+      defer
+    ></script>
   </head>
   <body class="flex min-h-screen flex-col bg-base-100 text-base-content">
     <a
@@ -53,6 +51,52 @@ const {
       <slot />
     </main>
     <Footer />
-    <script type="module" src={aosClientUrl}></script>
+    <script is:inline>
+      (function () {
+        if (typeof window === "undefined") return;
+
+        const initAOS = () => {
+          if (window.__taylormadeAOSLoaded) return;
+
+          const aos = window.AOS;
+          if (!aos) return;
+
+          window.__taylormadeAOSLoaded = true;
+
+          const reducedMotionQuery = window.matchMedia(
+            "(prefers-reduced-motion: reduce)",
+          );
+
+          const shouldDisable = () => reducedMotionQuery.matches;
+
+          aos.init({
+            disable: shouldDisable,
+            duration: 550,
+            easing: "ease-out",
+            once: true,
+            mirror: false,
+            offset: 80,
+          });
+
+          window.addEventListener("resize", () => {
+            aos.refresh();
+          });
+
+          reducedMotionQuery.addEventListener("change", () => {
+            aos.refresh();
+          });
+        };
+
+        if (typeof window.AOS === "undefined") {
+          window.addEventListener("load", initAOS, { once: true });
+        } else if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", initAOS, {
+            once: true,
+          });
+        } else {
+          initAOS();
+        }
+      })();
+    </script>
   </body>
 </html>
