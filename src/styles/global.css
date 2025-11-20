@@ -35,6 +35,7 @@
 
 :root {
   scroll-behavior: smooth;
+  --spacing: 0.25rem; /* fallback so Tailwind spacing utilities keep working even if cascade layers are stripped */
 }
 
 body {
