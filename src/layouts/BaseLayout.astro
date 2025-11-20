@@ -2,7 +2,6 @@
 import "../styles/output.css";
 import NavBar from "../components/NavBar.astro";
 import Footer from "../components/Footer.astro";
-import aosClientUrl from "../scripts/aos-client.js?url";
 
 interface Props {
   title?: string;
@@ -13,6 +12,11 @@ const {
   title = "TaylorMade Landscapes | Nelson Landscape Design & Gardening",
   description = "Owner-operated landscape gardening, design, and build across Nelson and Tasman by Giles Taylor.",
 } = Astro.props as Props;
+
+// Astro's runtime provides `Astro.resolve`, but the type isn't in our defs yet.
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const aosClientUrl = Astro.resolve("../scripts/aos-client.js");
 ---
 
 <!doctype html>
@@ -38,7 +42,10 @@ const {
       class="btn btn-sm btn-primary sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
       >Skip to content</a
     >
-    <header class="shadow-sm bg-base-100/90 backdrop-blur relative z-[90]">
+    <header
+      class="shadow-sm bg-base-100/90 backdrop-blur relative"
+      style="z-index: 90;"
+    >
       <NavBar />
     </header>
     <main id="main" class="flex-1">
