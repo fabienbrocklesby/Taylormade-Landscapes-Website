@@ -3,20 +3,29 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
-  { href: "/testimonials", label: "Testimonials" },
+  // { href: "/testimonials", label: "Testimonials" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];
 ---
 
-<nav class="navbar mx-auto max-w-6xl px-4" aria-label="Primary">
+<nav class="navbar mx-auto max-w-6xl px-4 relative z-50" aria-label="Primary">
   <div class="navbar-start">
     <a
-      class="text-xl font-semibold tracking-tight"
+      class="flex items-center gap-3 text-xl font-semibold tracking-tight"
       href="/"
       aria-label="TaylorMade Landscapes home"
     >
-      TaylorMade Landscapes
+      <img
+        src="/logo/Logo.png"
+        alt="TaylorMade Landscapes logo"
+        class="h-5 w-auto object-contain sm:h-6"
+        style="max-width: 10rem;"
+        width="200"
+        height="40"
+        loading="eager"
+        decoding="async"
+      />
     </a>
   </div>
   <div class="navbar-center hidden lg:flex">
@@ -37,7 +46,7 @@ const navLinks = [
       class="btn btn-primary hidden lg:inline-flex hover:shadow-xl"
       href="/contact">Request a quote</a
     >
-    <details class="dropdown dropdown-end lg:hidden">
+    <details class="dropdown dropdown-end lg:hidden" data-mobile-nav>
       <summary
         class="btn btn-ghost btn-circle"
         aria-label="Open navigation menu"
@@ -58,6 +67,7 @@ const navLinks = [
       </summary>
       <ul
         class="menu dropdown-content mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
+        style="z-index: 9999;"
       >
         {
           navLinks.map((link) => (
@@ -75,3 +85,35 @@ const navLinks = [
     </details>
   </div>
 </nav>
+
+<script is:inline>
+  if (typeof document !== "undefined") {
+    const navDropdown = document.querySelector("[data-mobile-nav]");
+
+    if (navDropdown) {
+      const handleDocumentClick = (event) => {
+        if (!navDropdown.hasAttribute("open")) return;
+        if (
+          event.target instanceof Node &&
+          !navDropdown.contains(event.target)
+        ) {
+          navDropdown.removeAttribute("open");
+        }
+      };
+
+      const handleKeydown = (event) => {
+        if (event.key === "Escape") {
+          navDropdown.removeAttribute("open");
+        }
+      };
+
+      document.addEventListener("click", handleDocumentClick);
+      document.addEventListener("keydown", handleKeydown);
+
+      window.addEventListener("astro:after-swap", () => {
+        document.removeEventListener("click", handleDocumentClick);
+        document.removeEventListener("keydown", handleKeydown);
+      });
+    }
+  }
+</script>

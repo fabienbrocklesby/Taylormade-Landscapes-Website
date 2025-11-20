@@ -96,8 +96,8 @@ const { defaultService } = Astro.props as Props;
           <select name="budgetRange" class="select select-bordered">
             <option value="">Select a range</option>
             <option value="under-10k">Under $10k</option>
-            <option value="10-25k">$10k – $25k</option>
-            <option value="25-50k">$25k – $50k</option>
+            <option value="10-25k">$10k - $25k</option>
+            <option value="25-50k">$25k - $50k</option>
             <option value="50k-plus">$50k +</option>
           </select>
         </label>
@@ -115,9 +115,9 @@ const { defaultService } = Astro.props as Props;
         <span class="label-text font-semibold">Preferred timing</span>
         <select name="preferredTiming" class="select select-bordered">
           <option value="asap">ASAP</option>
-          <option value="1-3-months">Next 1–3 months</option>
+          <option value="1-3-months">Next 1-3 months</option>
           <option value="this-year">Later this year</option>
-          <option value="flexible">I’m flexible</option>
+          <option value="flexible">I'm flexible</option>
         </select>
       </label>
       <div
@@ -130,7 +130,7 @@ const { defaultService } = Astro.props as Props;
       <div class="flex flex-wrap gap-4">
         <button type="submit" class="btn btn-primary">Send message</button>
         <p class="text-sm text-base-content/70">
-          We’ll reply within two working days.
+          We'll reply within two working days.
         </p>
       </div>
     </form>
@@ -167,7 +167,7 @@ const { defaultService } = Astro.props as Props;
           throw new Error(data?.message || "Something went wrong");
         }
         status.textContent =
-          "Thanks! We’ve received your message and will be in touch shortly.";
+          "Thanks! We've received your message and will be in touch shortly.";
         form.reset();
       } catch (error) {
         status.classList.remove(

@@ -1,9 +1,9 @@
-import type { EventContext, PagesFunction } from '@cloudflare/workers-types';
+import type { EventContext } from '@cloudflare/workers-types';
 
 interface Env {
-  RESEND_API_KEY?: string;
-  CONTACT_RECIPIENT?: string;
-  CONTACT_FROM_ADDRESS?: string;
+  ZEPTO_API_KEY?: string;
+  ZEPTO_FROM_ADDRESS?: string;
+  ZEPTO_TO_ADDRESS?: string;
 }
 
 interface ContactPayload {
@@ -21,7 +21,7 @@ const jsonHeaders = {
   'Content-Type': 'application/json',
 };
 
-export const onRequestPost: PagesFunction<Env> = async ({
+export const onRequestPost = async ({
   request,
   env,
 }: EventContext<Env, string, unknown>) => {
@@ -79,25 +79,68 @@ export const onRequestPost: PagesFunction<Env> = async ({
 };
 
 async function sendContactEmail(data: ContactPayload, env: Env) {
-  if (!env.RESEND_API_KEY || !env.CONTACT_RECIPIENT) {
-    console.warn('Missing email environment variables; skipping outbound email.');
+  if (!env.ZEPTO_API_KEY) {
+    console.warn('Missing ZEPTO_API_KEY; skipping outbound email.');
     return;
   }
 
+  const toAddress = env.ZEPTO_TO_ADDRESS || 'test@fabienbrocklesby.com';
+  const fromAddress = env.ZEPTO_FROM_ADDRESS || 'noreply@fabienbrocklesby.com';
   const subject = `New enquiry from ${data.name}`;
-  const content = `New website contact enquiry:\n\nName: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone}\nSuburb: ${data.suburb}\nService type: ${data.serviceType}\nBudget range: ${data.budgetRange || 'Not specified'}\nPreferred timing: ${data.preferredTiming || 'Not specified'}\n\nProject details:\n${data.description}`;
+  const htmlBody = `
+    <div style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+      <h2 style="margin-bottom: 0.5rem;">New website enquiry</h2>
+      <p><strong>Name:</strong> ${data.name}</p>
+      <p><strong>Email:</strong> ${data.email}</p>
+      <p><strong>Phone:</strong> ${data.phone}</p>
+      <p><strong>Suburb:</strong> ${data.suburb}</p>
+      <p><strong>Service type:</strong> ${data.serviceType}</p>
+      <p><strong>Budget range:</strong> ${data.budgetRange || 'Not specified'}</p>
+      <p><strong>Preferred timing:</strong> ${data.preferredTiming || 'Not specified'}</p>
+      <p><strong>Project details:</strong></p>
+      <p>${data.description.replace(/\n/g, '<br />')}</p>
+    </div>
+  `;
 
-  await fetch('https://api.resend.com/emails', {
+  const textBody = `New website contact enquiry
+
+Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone}
+Suburb: ${data.suburb}
+Service type: ${data.serviceType}
+Budget range: ${data.budgetRange || 'Not specified'}
+Preferred timing: ${data.preferredTiming || 'Not specified'}
+
+Project details:
+${data.description}`;
+
+  const response = await fetch('https://api.zeptomail.com.au/v1.1/email', {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${env.RESEND_API_KEY}`,
+      Accept: 'application/json',
       'Content-Type': 'application/json',
+      Authorization: `Zoho-enczapikey ${env.ZEPTO_API_KEY}`,
     },
     body: JSON.stringify({
-      from: env.CONTACT_FROM_ADDRESS || 'TaylorMade Landscapes <notifications@taylormadelandscapes.nz>',
-      to: [env.CONTACT_RECIPIENT],
+      from: { address: fromAddress },
+      to: [
+        {
+          email_address: {
+            address: toAddress,
+            name: 'TaylorMade Landscapes Contact',
+          },
+        },
+      ],
       subject,
-      text: content,
+      htmlbody: htmlBody,
+      textbody: textBody,
     }),
   });
+
+  if (!response.ok) {
+    const errorBody = await response.text();
+    console.error('Zepto Mail error', response.status, errorBody);
+    throw new Error('Failed to send contact email');
+  }
 }

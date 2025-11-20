@@ -8,8 +8,12 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "esModuleInterop": true,
+    "noEmit": true,
+    "skipLibCheck": true,
     "types": [
-      "astro/env"
+      "astro/env",
+      "astro/client",
+      "@cloudflare/workers-types/2023-07-01"
     ]
   },
   "include": [

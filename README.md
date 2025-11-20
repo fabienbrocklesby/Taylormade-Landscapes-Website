@@ -1,6 +1,6 @@
 # TaylorMade Landscapes marketing site
 
-Modern Astro + Tailwind CSS v4 brochure site for TaylorMade Landscapes (Nelson / Tasman, New Zealand). Ships with Cloudflare Pages hosting and a Pages Function that emails contact form enquiries via Resend (or your preferred provider).
+Modern Astro + Tailwind CSS v4 brochure site for TaylorMade Landscapes (Nelson / Tasman, New Zealand). Ships with Cloudflare Pages hosting and a Pages Function that emails contact form enquiries via Zepto Mail (or any email provider you wire up).
 
 ## Prerequisites
 
@@ -18,12 +18,12 @@ npm install
 Tailwind CSS v4 uses the CSS-first workflow. Run the CLI watcher in one terminal and Astro dev server in another:
 
 ```sh
-# Terminal 1 – Tailwind CSS watch mode
+# Terminal 1 - Tailwind CSS watch mode
 npm run dev:css
 ```
 
 ```sh
-# Terminal 2 – Astro dev server
+# Terminal 2 - Astro dev server
 npm run dev
 ```
 
@@ -47,15 +47,39 @@ The site now uses [AOS](https://michalsnik.github.io/aos/) for lightweight, acce
 npm run preview
 ```
 
-## Environment variables (Cloudflare Pages)
+## Environment variables (Cloudflare Pages + local dev)
 
 Set these in the Cloudflare Pages project → **Settings → Environment variables** (available in both production and preview environments):
 
 | Variable | Description |
 | --- | --- |
-| `RESEND_API_KEY` | API key for Resend (or any compatible email API). Optional during local dev; if missing, the worker logs a warning and skips email sending. |
-| `CONTACT_RECIPIENT` | Destination email address (e.g. `hello@taylormadelandscapes.nz`). |
-| `CONTACT_FROM_ADDRESS` | Verified sender for Resend, e.g. `TaylorMade Landscapes <notifications@taylormadelandscapes.nz>`. Optional – defaults to a placeholder. |
+| `ZEPTO_API_KEY` | Zoho EncZa API token from Zepto Mail. Required for the Cloudflare Function to send emails. |
+| `ZEPTO_FROM_ADDRESS` | Email address verified in Zepto Mail to use as the sender, e.g. `noreply@fabienbrocklesby.com`. Defaults to the noreply address above if omitted. |
+| `ZEPTO_TO_ADDRESS` | Destination address for enquiries, e.g. `test@fabienbrocklesby.com`. Defaults to the test inbox if omitted. |
+
+### Local Pages Functions testing
+
+1. Create a `.dev.vars` file in the project root (ignored by Git) with the same key/value pairs:
+
+   ```
+   ZEPTO_API_KEY="your-zepto-token"
+   ZEPTO_FROM_ADDRESS="noreply@fabienbrocklesby.com"
+   ZEPTO_TO_ADDRESS="test@fabienbrocklesby.com"
+   ```
+
+2. Build the site once so Wrangler has assets to serve:
+
+   ```sh
+   npm run build
+   ```
+
+3. Run the Cloudflare emulation (this serves static files + `/functions` endpoints using the env vars above):
+
+   ```sh
+   npx wrangler pages dev ./dist --local
+   ```
+
+   While Wrangler is running, submit the contact form at `http://127.0.0.1:8788` to test Zepto delivery with your local credentials. Use `Ctrl+C` to stop the server.
 
 ## Deploying to Cloudflare Pages
 
@@ -73,7 +97,7 @@ Set these in the Cloudflare Pages project → **Settings → Environment variabl
 
 - Accepts `POST /api/contact` with standard form fields.
 - Validates required fields and returns JSON `{ ok: true }` on success.
-- Attempts to send an email via the Resend API if credentials are present.
+- Attempts to send an email via the Zepto Mail API when `ZEPTO_API_KEY` is configured.
 - Returns meaningful HTTP status codes (400 validation errors, 405 method block, 500 on unexpected issues).
 
 ## Project structure
