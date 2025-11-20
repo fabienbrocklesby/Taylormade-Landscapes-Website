@@ -1,3 +1,3 @@
-import initAOS from "./aos-init.ts";
+import initAOS from "./aos-init";
 
 initAOS();
