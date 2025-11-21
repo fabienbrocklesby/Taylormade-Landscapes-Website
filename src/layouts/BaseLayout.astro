@@ -1,5 +1,5 @@
 ---
-import "../styles/output.css";
+import "../styles/global.css";
 import NavBar from "../components/NavBar.astro";
 import Footer from "../components/Footer.astro";
 
@@ -15,7 +15,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en" data-theme="garden">
+<html lang="en" data-theme="garden" style="--spacing: 0.25rem;">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -30,10 +30,13 @@ const {
       content="https://taylormadelandscapes.nz/og-image.jpg"
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <script
-      src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js"
-      defer
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.min.js" defer
     ></script>
+    <style is:inline>
+      :root {
+        --spacing: 0.25rem;
+      }
+    </style>
     <script is:inline>
       document.documentElement.style.setProperty("--spacing", "0.25rem");
     </script>

@@ -1,41 +1,12 @@
-@import "tailwindcss";
-@plugin "daisyui";
-
 @import "aos/dist/aos.css";
 
-@plugin "daisyui/theme" {
-  name: "garden";
-  default: true;
-  prefersdark: false;
-  color-scheme: light;
-
-  --color-primary: #184e21;
-  --color-primary-content: #f2f8ef;
-  --color-secondary: #169c08;
-  --color-secondary-content: #f1fbec;
-  --color-accent: #d5a900;
-  --color-accent-content: #ffffff;
-  --color-neutral: #1f2a24;
-  --color-neutral-content: #f2f7f0;
-
-  --color-base-100: #f9fcf4;
-  --color-base-200: #edf3e6;
-  --color-base-300: #dfe8d4;
-  --color-base-content: oklch(32% 0.035 152);
-
-  --color-info: #4b9fdc;
-  --color-info-content: #ffffff;
-  --color-success: #2e7d32;
-  --color-success-content: #f3f8f2;
-  --color-warning: #f1c40f;
-  --color-warning-content: #1d1500;
-  --color-error: #c0392b;
-  --color-error-content: #fff5f2;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   scroll-behavior: smooth;
-  --spacing: 0.25rem; /* fallback so Tailwind spacing utilities keep working even if cascade layers are stripped */
+  --spacing: 0.25rem;
 }
 
 body {
@@ -48,146 +19,18 @@ a {
   color: oklch(var(--p) / 1);
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
+  transition: color 150ms ease;
 }
 
 a:hover,
-a:focus {
+a:focus-visible {
   color: oklch(var(--s) / 1);
-}
-
-.btn-primary,
-.btn-primary:hover,
-.btn-primary:focus-visible {
-  color: var(--color-primary-content);
 }
 
 img,
 svg {
   max-width: 100%;
   height: auto;
-}
-
-.section-title {
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.section-subtitle {
-  color: oklch(var(--bc) / 0.8);
-}
-
-.nav-link {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.15rem;
-  padding-block: 0.25rem;
-  transition: color 180ms ease, transform 180ms ease;
-}
-
-.nav-link::after {
-  content: "";
-  position: absolute;
-  inset-inline: 0;
-  bottom: -0.1rem;
-  height: 2px;
-  transform: scaleX(0);
-  transform-origin: left;
-  background: currentColor;
-  transition: transform 200ms ease;
-}
-
-.nav-link:hover,
-.nav-link:focus-visible {
-  color: oklch(var(--p) / 1);
-}
-
-.nav-link:hover::after,
-.nav-link:focus-visible::after {
-  transform: scaleX(1);
-}
-
-.btn {
-  transition:
-    transform 200ms ease,
-    box-shadow 200ms ease,
-    background-color 200ms ease,
-    color 200ms ease;
-}
-
-.btn:focus-visible {
-  outline: 2px solid oklch(var(--p) / 1);
-  outline-offset: 2px;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-}
-
-.btn:active {
-  transform: translateY(0);
-}
-
-.btn-primary {
-  color: var(--color-primary-content);
-  box-shadow: 0 10px 25px oklch(var(--p) / 0.15);
-}
-
-.btn-primary:hover,
-.btn-primary:focus-visible {
-  color: var(--color-primary-content);
-  box-shadow: 0 12px 30px oklch(var(--p) / 0.2);
-}
-
-.btn-primary:active {
-  transform: scale(0.98);
-}
-
-.card,
-.input,
-.select,
-.textarea,
-.collapse {
-  transition:
-    transform 200ms ease,
-    border-color 200ms ease,
-    box-shadow 200ms ease,
-    background-color 200ms ease;
-}
-
-.card:hover,
-.card:focus-within {
-  box-shadow: 0 20px 45px oklch(var(--n) / 0.1);
-}
-
-.input:focus-visible,
-.select:focus-visible,
-.textarea:focus-visible {
-  border-color: oklch(var(--p) / 1);
-  box-shadow: 0 0 0 3px color-mix(in oklab, oklch(var(--p) / 0.15), transparent);
-}
-
-.social-button {
-  transition: transform 200ms ease, box-shadow 200ms ease;
-}
-
-.social-button:hover,
-.social-button:focus-visible {
-  transform: translateY(-4px) rotate(-2deg);
-  box-shadow: 0 12px 24px oklch(var(--s) / 0.2);
-}
-
-.faq-answer {
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 250ms ease, transform 250ms ease;
-}
-
-.collapse-open .faq-answer,
-.collapse input:checked~.collapse-content .faq-answer,
-.collapse[open] .faq-answer {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {

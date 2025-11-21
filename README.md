@@ -1,6 +1,6 @@
 # TaylorMade Landscapes marketing site
 
-Modern Astro + Tailwind CSS v4 brochure site for TaylorMade Landscapes (Nelson / Tasman, New Zealand). Ships with Cloudflare Pages hosting and a Pages Function that emails contact form enquiries via Zepto Mail (or any email provider you wire up).
+Modern Astro + Tailwind CSS (via the official Astro integration) brochure site for TaylorMade Landscapes (Nelson / Tasman, New Zealand). Ships with Cloudflare Pages hosting and a Pages Function that emails contact form enquiries via Zepto Mail (or any email provider you wire up).
 
 ## Prerequisites
 
@@ -15,19 +15,11 @@ npm install
 
 ## Local development
 
-Tailwind CSS v4 uses the CSS-first workflow. Run the CLI watcher in one terminal and Astro dev server in another:
+The Tailwind integration runs automatically inside Vite, so you only need a single dev server:
 
 ```sh
-# Terminal 1 - Tailwind CSS watch mode
-npm run dev:css
-```
-
-```sh
-# Terminal 2 - Astro dev server
 npm run dev
 ```
-
-The CSS watcher compiles `src/styles/global.css` into `src/styles/output.css`, which is imported by the base layout.
 
 ## Build for production
 
@@ -35,7 +27,7 @@ The CSS watcher compiles `src/styles/global.css` into `src/styles/output.css`, w
 npm run build
 ```
 
-This script runs the Tailwind CLI to refresh `src/styles/output.css` and then executes `astro build`, emitting static files to `dist/` for Cloudflare Pages.
+Astro handles Tailwind/DaisyUI compilation for you and emits static files to `dist/` for Cloudflare Pages.
 
 ## Scroll animations
 

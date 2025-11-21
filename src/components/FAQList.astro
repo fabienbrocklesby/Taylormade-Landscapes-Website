@@ -55,8 +55,12 @@ const faqs = [
     data-aos-duration="600"
     data-aos-easing="ease-out"
   >
-    <p class="section-subtitle">FAQs</p>
-    <h2 class="section-title text-3xl">
+    <p
+      class="text-sm font-semibold uppercase tracking-wide text-base-content/70"
+    >
+      FAQs
+    </p>
+    <h2 class="text-3xl font-bold tracking-tight">
       Straight answers before the shovel hits the ground
     </h2>
     <p class="mx-auto max-w-2xl text-base-content/80">
@@ -77,7 +81,7 @@ const faqs = [
           <input type="checkbox" name={`faq-${idx}`} />
           <div class="collapse-title text-lg font-medium">{item.question}</div>
           <div class="collapse-content text-base-content/80">
-            <p class="faq-answer">{item.answer}</p>
+            <p>{item.answer}</p>
           </div>
         </div>
       ))
