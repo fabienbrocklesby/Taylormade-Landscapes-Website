@@ -1,20 +1,20 @@
 <section id="home-hero" class="relative min-h-screen overflow-hidden">
-  <!-- Background image -->
+  <!-- Background image with brightness/saturation boost -->
   <div class="absolute inset-0">
     <picture>
-      <source srcset="/images/after.webp" type="image/webp" />
+      <source srcset="/images/garden1.jpg" type="image/webp" />
       <img
-        src="/images/after.jpg"
+        src="/images/garden1.jpg"
         alt="Mature backyard with new paving, structured planting, and outdoor seating"
-        class="h-full w-full object-cover"
+        class="h-full w-full object-cover brightness-105 contrast-105 saturate-110"
         decoding="async"
         loading="eager"
       />
     </picture>
   </div>
 
-  <!-- White overlay -->
-  <div class="absolute inset-0 bg-white/80"></div>
+  <!-- Green-tinted overlay for brand vibrancy -->
+  <div class="absolute inset-0 bg-white/40"></div>
 
   <!-- Foreground content -->
   <div class="relative z-10 flex min-h-screen flex-col">
@@ -34,11 +34,13 @@
     </div>
 
     <!-- Middle: Centered text stack -->
-    <div class="flex flex-1 w-full items-center justify-center">
-      <div class="max-w-3xl text-center px-6">
+    <div class="flex flex-1 w-full items-center justify-center p-4 md:p-0">
+      <div
+        class="max-w-2xl xl:max-w-4xl text-center px-6 bg-primary/60 p-16 rounded-xl"
+      >
         <!-- H1 headline -->
         <h1
-          class="text-4xl md:text-6xl font-bold leading-tight text-base-content mb-6"
+          class="text-4xl md:text-6xl font-bold leading-tight text-accent mb-6"
           data-aos="zoom-inn"
           data-aos-duration="650"
           data-aos-easing="ease-out"
@@ -48,7 +50,7 @@
 
         <!-- Short description -->
         <p
-          class="text-base md:text-lg text-black"
+          class="text-base md:text-lg text-white font-semibold"
           data-aos="fade-up"
           data-aos-duration="650"
           data-aos-delay="200"
@@ -65,7 +67,7 @@
           data-aos="fade-up"
           data-aos-duration="500"
           data-aos-easing="ease-out"
-          data-aos-delay="300"
+          data-aos-delay="250"
         >
           Nelson · Tasman
         </p>
@@ -78,7 +80,9 @@
       data-aos="fade"
       data-aos-delay="300"
     >
-      <h2 class="text-xl md:text-3xl text-black font-extralight text-center">
+      <h2
+        class="text-xl md:text-3xl text-base-content font-extralight text-center"
+      >
         Local experience, tidy workmanship
       </h2>
       <div class="w-full flex justify-center mt-4">

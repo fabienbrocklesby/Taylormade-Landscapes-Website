@@ -19,7 +19,7 @@ module.exports = {
           'primary-content': '#f2f8ef',
           secondary: '#169c08',
           'secondary-content': '#f1fbec',
-          accent: '#d5a900',
+          accent: '#FCD10E',
           'accent-content': '#ffffff',
           neutral: '#1f2a24',
           'neutral-content': '#f2f7f0',

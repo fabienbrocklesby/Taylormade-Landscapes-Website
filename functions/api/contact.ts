@@ -84,7 +84,7 @@ async function sendContactEmail(data: ContactPayload, env: Env) {
     return;
   }
 
-  const toAddress = env.ZEPTO_TO_ADDRESS || 'test@fabienbrocklesby.com';
+  const toAddress = env.ZEPTO_TO_ADDRESS || 'enquiry@taylormadelandscapes.co.nz';
   const fromAddress = env.ZEPTO_FROM_ADDRESS || 'noreply@fabienbrocklesby.com';
   const subject = `New enquiry from ${data.name}`;
   const htmlBody = `
