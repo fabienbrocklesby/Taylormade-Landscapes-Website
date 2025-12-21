@@ -1,3 +1,60 @@
 ---
-return Astro.redirect("/", 301);
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectGrid from "../components/ProjectGrid.astro";
+import BeforeAfter from "../components/BeforeAfter.astro";
 ---
+
+<BaseLayout
+  title="Our Projects | TaylorMade Landscapes"
+  description="View our portfolio of residential landscaping projects across Nelson and Tasman. Before and after transformations, garden makeovers, and outdoor living spaces."
+>
+  <div class="mx-auto flex max-w-6xl flex-col gap-16 px-4 py-12 lg:py-16">
+    <section class="space-y-6">
+      <div
+        class="space-y-2 text-center"
+        data-aos="fade-up"
+        data-aos-duration="600"
+      >
+        <p
+          class="text-sm font-semibold uppercase tracking-wide text-base-content/70"
+        >
+          Our Work
+        </p>
+        <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">
+          Projects & Transformations
+        </h1>
+        <p class="mx-auto max-w-2xl text-lg text-base-content/80">
+          Browse our recent landscaping work across Nelson and Tasman, from full
+          garden builds to before-and-after makeovers.
+        </p>
+      </div>
+    </section>
+
+    <BeforeAfter />
+
+    <ProjectGrid />
+
+    <section
+      class="rounded-3xl bg-primary px-6 py-12 text-primary-content"
+      data-aos="fade-up"
+      data-aos-duration="600"
+      data-aos-easing="ease-out"
+    >
+      <div class="space-y-4 text-center">
+        <h2 class="text-3xl font-bold">
+          Ready to transform your outdoor space?
+        </h2>
+        <p class="text-lg">
+          Book a no-obligation site visit. Giles will listen, offer honest
+          advice, and send a clear quote with realistic timeframes.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a class="btn btn-secondary" href="/contact">Request a quote</a>
+          <a class="btn btn-accent btn-outline" href="tel:+64272276489"
+            >Call 027 227 6489</a
+          >
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

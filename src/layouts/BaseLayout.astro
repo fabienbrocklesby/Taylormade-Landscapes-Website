@@ -6,11 +6,13 @@ import Footer from "../components/Footer.astro";
 interface Props {
   title?: string;
   description?: string;
+  hideNav?: boolean;
 }
 
 const {
   title = "TaylorMade Landscapes | Nelson Landscape Design & Gardening",
   description = "Owner-operated landscape gardening, design, and build across Nelson and Tasman by Giles Taylor.",
+  hideNav = false,
 } = Astro.props as Props;
 ---
 
@@ -47,12 +49,28 @@ const {
       class="btn btn-sm btn-primary sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
       >Skip to content</a
     >
-    <header
-      class="shadow-sm bg-base-100/90 backdrop-blur relative"
-      style="z-index: 90;"
-    >
-      <NavBar />
-    </header>
+    {/* Normal navbar for non-home pages */}
+    {
+      !hideNav && (
+        <header
+          class="shadow-sm bg-base-100/90 backdrop-blur relative"
+          style="z-index: 90;"
+        >
+          <NavBar />
+        </header>
+      )
+    }
+    {/* Scroll-aware fixed navbar for home page */}
+    {
+      hideNav && (
+        <header
+          id="scroll-navbar"
+          class="fixed top-0 left-0 right-0 z-50 shadow-sm bg-base-100/90 backdrop-blur transition-all duration-300 -translate-y-full opacity-0"
+        >
+          <NavBar />
+        </header>
+      )
+    }
     <main id="main" class="flex-1">
       <slot />
     </main>

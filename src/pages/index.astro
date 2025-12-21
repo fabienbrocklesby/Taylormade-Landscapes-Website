@@ -3,16 +3,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroHome from "../components/HeroHome.astro";
 import ServicesOverview from "../components/ServicesOverview.astro";
 import TestimonialList from "../components/TestimonialList.astro";
-import BeforeAfter from "../components/BeforeAfter.astro";
 ---
 
 <BaseLayout
   title="TaylorMade Landscapes | Nelson & Tasman Residential Landscaping"
   description="Hands-on landscape design, builds, planting, and garden care for Nelson and Tasman homes by owner-operator Giles Taylor."
+  hideNav={true}
 >
+  <HeroHome />
   <div class="mx-auto flex max-w-6xl flex-col gap-16 px-4 py-12 lg:py-16">
-    <HeroHome />
-
     <section aria-labelledby="why-title" class="space-y-6">
       <div
         class="text-center"
@@ -80,8 +79,6 @@ import BeforeAfter from "../components/BeforeAfter.astro";
 
     <ServicesOverview />
 
-    <BeforeAfter />
-
     <!-- <section class="space-y-8">
       <TestimonialList limit={3} />
       <div
@@ -120,3 +117,36 @@ import BeforeAfter from "../components/BeforeAfter.astro";
     </section>
   </div>
 </BaseLayout>
+
+<script is:inline>
+  (function () {
+    if (typeof window === "undefined") return;
+
+    const hero = document.getElementById("home-hero");
+    const navbar = document.getElementById("scroll-navbar");
+
+    if (!hero || !navbar) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Hero is visible: hide navbar
+            navbar.classList.add("-translate-y-full", "opacity-0");
+            navbar.classList.remove("translate-y-0", "opacity-100");
+          } else {
+            // Hero is not visible: show navbar
+            navbar.classList.remove("-translate-y-full", "opacity-0");
+            navbar.classList.add("translate-y-0", "opacity-100");
+          }
+        });
+      },
+      {
+        threshold: 0,
+        rootMargin: "-10% 0px 0px 0px",
+      },
+    );
+
+    observer.observe(hero);
+  })();
+</script>
